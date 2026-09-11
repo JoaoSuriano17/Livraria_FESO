@@ -1,119 +1,569 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
 import './App.css'
+import { Routes, Route, Link } from "react-router";
+import Cadastro from './cadastro'
+import Login from './Login'
+import {
+  Search,
+  Heart,
+  ShoppingCart,
+  User,
+  Menu,
+  Star,
+  BookOpenCheck,
+  Quote,
+  ChevronsRight,
+} from "lucide-react";
 
 function App() {
-  const [count, setCount] = useState(0)
+  
+  let a = <Link to={"/cadastro"}>Crie uma</Link>
+  let b = <Link to={"/login"}>Faça login</Link>
 
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
+      <header>
+        <div className='topo'>
+          <nav className="navbar grid grid-cols-2 md:grid-cols-3 items-center">
+            <div className="nav-logo">
+              <i
+                className="fa-brands fa-tailwind-css fa-2xl"
+                style={{ color: "oklch(67.3% .182 276.935)" }}
+              ></i>
+            </div>
+
+            <div className="nav-links font-medium flex gap-8 list-none justify-center">
+              <li><a href="#">Início</a></li>
+              <li><a href="#">Gêneros</a></li>
+              <li><a href="#">Autores</a></li>
+              <li><a href="#">Resenhas</a></li>
+              <li><a href="#">Minha Estante</a></li>
+            </div>
+
+            <div className="nav-conta flex gap-6 list-none justify-end items-center">
+              <div className="search-wrapper">
+                <input
+                  type="text"
+                  className="search-input rounded-full mr-2"
+                  placeholder="Buscar livros..."
+                />
+                <button className="search-toggle" aria-label="Abrir busca">
+                  <Search />
+                </button>
+              </div>
+
+              <div className="div-account flex gap-6">
+                <li><a href="#"><Heart /></a></li>
+                <li><a href="#"><ShoppingCart /></a></li>
+                <li><a href="#"><User /></a></li>
+              </div>
+
+              <button
+                className="navbar-toggle"
+                aria-label="Abrir menu"
+                aria-expanded="false"
+              >
+                <Menu />
+              </button>
+            </div>
+          </nav>
+
+          <section className="hero overflow-hidden w-full m-auto py-32 sm:py-48 lg:py-56">
+
+            <div
+              aria-hidden="true"
+              className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80"
+            >
+              <div
+                style={{
+                  clipPath:
+                    "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
+                }}
+                className="relative left-[calc(50%-11rem)] aspect-1155/678 w-144.5 -translate-x-1/2 rotate-30 bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%-30rem)] sm:w-288.75"
+              ></div>
+            </div>
+
+            <div className="text-center m-auto max-w-3xl">
+              <p className="mb-6 ring-1 ring-gray-500 hover:ring-gray-400 text-gray-400 py-1.5 text-xs sm:text-sm w-68 rounded-full m-auto">
+                Mais de 12.000 títulos disponíveis
+              </p>
+
+              <h1 className="text-5xl text-balance font-semibold sm:text-6xl">
+                Descubra sua próxima leitura
+              </h1>
+
+              <h3 className="text-base/6 p-3 sm:p-0 text-gray-400 font-medium my-9 sm:text-xl/8">
+                Encontre mais que simples obras: encontre
+                perspectivas, inspirações, emoção e desperte sua imaginação. Explore
+                nosso catálogo feito para quem ama ser leitor
+              </h3>
+
+              <div className="flex gap-6 justify-center mt-5">
+                <button className="rounded-md bg-indigo-500 font-semibold px-3 py-2 transition-all hover:bg-indigo-400 hover:-translate-y-1">
+                  <a href="#">Explorar Catálogo</a>
+                </button>
+
+                <button className="rounded-md bg-gray-700 font-semibold px-3 py-2 transition-all hover:bg-gray-500 hover:-translate-y-1">
+                  <a href="#">Ver Resenhas</a>
+                </button>
+              </div>
+            </div>
+          </section>
         </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
+
+        <div
+          aria-hidden="true"
+          className="absolute inset-x-0 top-[calc(100%-13rem)] -z-10 transform-gpu overflow-hidden blur-3xl sm:top-[calc(100%-30rem)]"
         >
-          Count is {count}
+          <div
+            style={{
+              clipPath:
+                "polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"
+            }}
+            className="relative left-[calc(50%+3rem)] aspect-1155/678 w-144.5 -translate-x-1/2 bg-linear-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-288.75"
+          ></div>
+        </div>
+      </header>
+
+      <main className="mx-auto max-w-2xl lg:max-w-7xl p-10 lg:p-8 my-8">
+
+        <div id="livros-populares" className="sessao-livros w-full">
+          <h2>Populares</h2>
+          <p>O que todos estão lendo</p>
+
+          <div className="sessao-lista-livros">
+
+            <div className="card-livro">
+              <div id="div-img-livro" className="relative">
+                <img
+                  src="https://imgs.search.brave.com/G6Vq6U2WXyPwi4tzNKymHOu6z-pvFrEPFiCYwUakgV0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/Zm90b3MtcHJlbWl1/bS9kZXNlbmhvLWRl/LW1hcXVldGUtZGUt/Y2FwYS1kZS1saXZy/by0zZC1pbWFnZW0t/Y29sb3JpZGEtcmVh/bGlzdGFfMTI3MjYy/NS0zOTM2LmpwZz9z/ZW10PWFpc19oeWJy/aWQ"
+                  alt=""
+                  className="rounded-md"
+                />
+
+                <button className="heart-favoritar cursor-pointer">
+                  <Heart className="icon-favoritar" />
+                </button>
+
+                <div
+                  id="btns-carrinho-detalhe"
+                  className="flex flex-col items-center gap-2 w-full"
+                >
+                  <button className="flex gap-2 justify-center items-center bg-indigo-500 font-medium hover:bg-indigo-400">
+                    Adicionar ao carrinho
+                    <ShoppingCart size={20} />
+                  </button>
+
+                  <button className="bg-gray-100 font-medium text-gray-900 hover:bg-gray-300">
+                    Ver detalhes
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <h3 className="text-lg mt-2.5 font-bold">Titulo do livro</h3>
+                <p className="text-base text-gray-300 font-medium">Autor</p>
+
+                <div className="flex items-center gap-2 mt-2.5">
+                  <div className="flex">
+                    <Star size={16} />
+                    <Star size={16} />
+                    <Star size={16} />
+                    <Star size={16} />
+                    <Star size={16} />
+                  </div>
+
+                  <p className="text-sm">Nota</p>
+                  <p className="text-sm">Qtde</p>
+                </div>
+
+                <h3 className="text-xl font-bold mt-3">Preço</h3>
+              </div>
+            </div>
+
+            <div className="card-livro">
+              <img
+                src="https://imgs.search.brave.com/G6Vq6U2WXyPwi4tzNKymHOu6z-pvFrEPFiCYwUakgV0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/Zm90b3MtcHJlbWl1/bS9kZXNlbmhvLWRl/LW1hcXVldGUtZGUt/Y2FwYS1kZS1saXZy/by0zZC1pbWFnZW0t/Y29sb3JpZGEtcmVh/bGlzdGFfMTI3MjYy/NS0zOTM2LmpwZz9z/ZW10PWFpc19oeWJy/aWQ"
+                alt=""
+                className="rounded-md"
+              />
+
+              <div>
+                <h3 className="text-lg mt-2.5 font-bold">Titulo do livro</h3>
+                <p className="text-base text-gray-300 font-medium">Autor</p>
+
+                <div className="flex items-center gap-2">
+                  <div className="flex">
+                    <Star size={16} />
+                    <Star size={16} />
+                    <Star size={16} />
+                    <Star size={16} />
+                    <Star size={16} />
+                  </div>
+
+                  <p className="text-sm">Nota</p>
+                  <p className="text-sm">Qtde</p>
+                </div>
+
+                <h3 className="text-xl font-bold mt-3">Preço</h3>
+              </div>
+            </div>
+
+            <div className="card-livro">
+              <img
+                src="https://imgs.search.brave.com/G6Vq6U2WXyPwi4tzNKymHOu6z-pvFrEPFiCYwUakgV0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/Zm90b3MtcHJlbWl1/bS9kZXNlbmhvLWRl/LW1hcXVldGUtZGUt/Y2FwYS1kZS1saXZy/by0zZC1pbWFnZW0t/Y29sb3JpZGEtcmVh/bGlzdGFfMTI3MjYy/NS0zOTM2LmpwZz9z/ZW10PWFpc19oeWJy/aWQ"
+                alt=""
+                className="rounded-md"
+              />
+
+              <div>
+                <h3 className="text-lg mt-2.5 font-bold">Titulo do livro</h3>
+                <p className="text-base text-gray-300 font-medium">Autor</p>
+
+                <div className="flex items-center gap-2">
+                  <div className="flex">
+                    <Star size={16} />
+                    <Star size={16} />
+                    <Star size={16} />
+                    <Star size={16} />
+                    <Star size={16} />
+                  </div>
+
+                  <p className="text-sm">Nota</p>
+                  <p className="text-sm">Qtde</p>
+                </div>
+
+                <h3 className="text-xl font-bold mt-3">Preço</h3>
+              </div>
+            </div>
+
+            <div className="card-livro">
+              <img
+                src="https://imgs.search.brave.com/G6Vq6U2WXyPwi4tzNKymHOu6z-pvFrEPFiCYwUakgV0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/Zm90b3MtcHJlbWl1/bS9kZXNlbmhvLWRl/LW1hcXVldGUtZGUt/Y2FwYS1kZS1saXZy/by0zZC1pbWFnZW0t/Y29sb3JpZGEtcmVh/bGlzdGFfMTI3MjYy/NS0zOTM2LmpwZz9z/ZW10PWFpc19oeWJy/aWQ"
+                alt=""
+                className="rounded-md"
+              />
+
+              <div>
+                <h3 className="text-lg mt-2.5 font-bold">Titulo do livro</h3>
+                <p className="text-base text-gray-300 font-medium">Autor</p>
+
+                <div className="flex items-center gap-2">
+                  <div className="flex">
+                    <Star size={16} />
+                    <Star size={16} />
+                    <Star size={16} />
+                    <Star size={16} />
+                    <Star size={16} />
+                  </div>
+
+                  <p className="text-sm">Nota</p>
+                  <p className="text-sm">Qtde</p>
+                </div>
+
+                <h3 className="text-xl font-bold mt-3">Preço</h3>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div id="livros-fantasia" className="sessao-livro">
+          <h2>Fantasia</h2>
+          <p>Mundos imaginários e histórias criativas</p>
+
+          <div className="sessao-lista-livros mt-4 flex gap-6">
+
+            {[1, 2, 3, 4].map((item) => (
+              <div className="card-livro" key={item}>
+                <img
+                  src="https://imgs.search.brave.com/G6Vq6U2WXyPwi4tzNKymHOu6z-pvFrEPFiCYwUakgV0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/Zm90b3MtcHJlbWl1/bS9kZXNlbmhvLWRlLW1hcXVldGUtZGUt/Y2FwYS1kZS1saXZy/by0zZC1pbWFnZW0t/Y29sb3JpZGEtcmVh/bGlzdGFfMTI3MjYy/NS0zOTM2LmpwZz9z/ZW10PWFpc19oeWJy/aWQ"
+                  alt=""
+                  className="rounded-md"
+                />
+
+                <div>
+                  <h3 className="text-lg mt-2.5 font-bold">Titulo do livro</h3>
+                  <p className="text-base text-gray-300 font-medium">Autor</p>
+
+                  <div className="flex items-center gap-2">
+                    <div className="flex">
+                      <Star size={16} />
+                      <Star size={16} />
+                      <Star size={16} />
+                      <Star size={16} />
+                      <Star size={16} />
+                    </div>
+
+                    <p className="text-sm">Nota</p>
+                    <p className="text-sm">Qtde</p>
+                  </div>
+
+                  <h3 className="text-xl font-bold mt-3">Preço</h3>
+                </div>
+              </div>
+            ))}
+
+          </div>
+        </div>
+
+        <div id="livros-romance" className="sessao-livros">
+          <h2>Romance</h2>
+          <p>Contos longos que prendem sua atenção</p>
+
+          <div className="sessao-lista-livros mt-4 flex gap-6">
+
+            {[1, 2, 3, 4].map((item) => (
+              <div className="card-livro" key={item}>
+                <img
+                  src="https://imgs.search.brave.com/G6Vq6U2WXyPwi4tzNKymHOu6z-pvFrEPFiCYwUakgV0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/Zm90b3MtcHJlbWl1/bS9kZXNlbmhvLWRlLw"
+                  alt=""
+                  className="rounded-md"
+                />
+
+                <div>
+                  <h3 className="text-lg mt-2.5 font-bold">Titulo do livro</h3>
+                  <p className="text-base text-gray-300 font-medium">Autor</p>
+
+                  <div className="flex items-center gap-2">
+                    <div className="flex">
+                      <Star size={16} />
+                      <Star size={16} />
+                      <Star size={16} />
+                      <Star size={16} />
+                      <Star size={16} />
+                    </div>
+
+                    <p className="text-sm">Nota</p>
+                    <p className="text-sm">Qtde</p>
+                  </div>
+
+                  <h3 className="text-xl font-bold mt-3">Preço</h3>
+                </div>
+              </div>
+            ))}
+
+          </div>
+        </div>
+
+        <div id="livros-misterio" className="sessao-livros ">
+          <h2>Mistério e Suspense</h2>
+          <p>Tramas emocionantes e reviravoltas</p>
+
+          <div className="sessao-lista-livros mt-4 flex gap-6">
+
+            {[1, 2, 3, 4].map((item) => (
+              <div className="card-livro" key={item}>
+                <img
+                  src="https://imgs.search.brave.com/G6Vq6U2WXyPwi4tzNKymHOu6z-pvFrEPFiCYwUakgV0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/Zm90b3MtcHJlbWl1/bS9kZXNlbmhvLWRlL"
+                  alt=""
+                  className="rounded-md"
+                />
+
+                <div>
+                  <h3 className="text-lg mt-2.5 font-bold">Titulo do livro</h3>
+                  <p className="text-base text-gray-300 font-medium">Autor</p>
+
+                  <div className="flex items-center gap-2">
+                    <div className="flex">
+                      <Star size={16} />
+                      <Star size={16} />
+                      <Star size={16} />
+                      <Star size={16} />
+                      <Star size={16} />
+                    </div>
+
+                    <p className="text-sm">Nota</p>
+                    <p className="text-sm">Qtde</p>
+                  </div>
+
+                  <h3 className="text-xl font-bold mt-3">Preço</h3>
+                </div>
+              </div>
+            ))}
+
+          </div>
+        </div>
+
+      </main>
+
+      <section id="previa-resenhas" className="text-center max-w-full p-12 lg:p-24 m-auto">
+
+        <p className="mb-7 flex items-center justify-center gap-1.5 ring-1 ring-gray-500 hover:ring-gray-400 text-gray-400 py-1.5 text-xs sm:text-sm w-54 rounded-full m-auto">
+          <BookOpenCheck size={20} />
+          Hall de Resenhas
+        </p>
+
+        <h1 className="text-5xl text-balance font-semibold sm:text-4xl">
+          Descubra o que os leitores estão dizendo
+        </h1>
+
+        <h3 className="max-w-2xl m-auto text-base/6 p-3 sm:p-0 text-gray-400 font-medium my-7 sm:text-lg/8">
+          Junte-se a milhares de leitores que compartilham
+          experiências, descobertas e emoções em nosso espaço dedicado à literatura.
+        </h3>
+
+        <div id="preview-resenha" className="flex gap-7">
+
+          {[1, 2, 3].map((item) => (
+            <div
+              id={`card-resenha-${item}`}
+              className="w-sm bg-gray-800 flex flex-col gap-4 border rounded-2xl border-indigo-400 p-6"
+              key={item}
+            >
+              <Quote className="text-indigo-400" />
+
+              <p className="text-start text-lg font-medium">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Ullam amet laboriosam deserunt, quo maiores fugit saepe.
+              </p>
+
+              <div className="estrelas flex">
+                <Star className="fill-indigo-500 text-indigo-500" size={16} />
+                <Star className="fill-indigo-500 text-indigo-500" size={16} />
+                <Star className="fill-indigo-500 text-indigo-500" size={16} />
+                <Star className="fill-indigo-500 text-indigo-500" size={16} />
+                <Star className="text-gray-500" size={16} />
+              </div>
+
+              <hr className="text-gray-600" />
+
+              <div className="flex items-center gap-3">
+                <img
+                  src="https://imgs.search.brave.com/vjxXZ2TH4aWuAagTsRnosHNbJ5nGPg1R8pAlToUtSMI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzQzL2Ri/LzcxLzQzZGI3MWM2/YmViNDQ5NzFjZGY1/ZmNhYzRlOWI0Njk0/LmpwZw"
+                  alt=""
+                  className="rounded-full w-12 h-12 object-cover"
+                />
+
+                <div className="flex flex-col items-baseline">
+                  <p className="font-bold">Nome</p>
+                  <p className="font-medium text-gray-300 italic text-xs">
+                    Sobre o livro
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))}
+
+        </div>
+
+        <button className="flex items-center gap-1 m-auto rounded-md mt-10 bg-indigo-500 font-semibold px-4 py-4 transition-all hover:bg-indigo-400 hover:-translate-y-1">
+          <a href="#">Ver Hall de resenhas</a>
+          <ChevronsRight size={20} />
         </button>
       </section>
 
-      <div className="ticks"></div>
+      <footer className="border-t border-t-gray-700 flex-1">
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+        <div
+          id="newsletter"
+          className="bg-gray-800 rounded-xl max-w-7xl m-auto my-10 flex sm:flex-row md:flex-row flex-col sm:gap-0 gap-4 items-center justify-between p-2 sm:p-10"
+        >
+          <div>
+            <h2 className="text-white font-bold text-base">
+              Receba resenhas na sua caixa de entrada
+            </h2>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+            <p className="text-gray-400 font-medium text-sm">
+              Uma newsletter semanal com os livros mais bem avaliados e
+              recomendações da comunidade.
+            </p>
+          </div>
+
+          <div>
+            <input
+              type="email"
+              placeholder="Seu email"
+              className="rounded-md font-medium w-xs bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6"
+            />
+
+            <button
+              type="submit"
+              className="rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white cursor-pointer hover:bg-indigo-400"
+            >
+              Assinar
+            </button>
+          </div>
+        </div>
+
+        <div
+          id="links-footer"
+          className="grid grid-cols-1 sm:grid-cols-4 max-w-7xl m-auto my-16 gap-6 sm:gap-0 items-center text-center sm:text-left justify-items-center p-2 sm:p-5 text-sm"
+        >
+          <div>
+            <h3 className="font-bold text-lg flex items-center gap-2.5 justify-center sm:justify-start">
+              <i
+                className="fa-brands fa-tailwind-css fa-xl"
+                style={{ color: "oklch(67.3% .182 276.935)" }}
+              ></i>
+              Página
+            </h3>
+
+            <p className="text-gray-400 font-medium">
+              Uma livraria feita por leitores. Compre livros e descubra o que a
+              comunidade realmente achou de cada um.
+            </p>
+          </div>
+
+          <div>
+            <h3 className="font-bold">Explorar</h3>
+
+            <ul>
+              <li><a href="#">Lançamentos</a></li>
+              <li><a href="#">Mais vendidos</a></li>
+              <li><a href="#">Resenhas</a></li>
+              <li><a href="#">Categorias</a></li>
+              <li><a href="#">Promoções</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="font-bold">Institucional</h3>
+
+            <ul>
+              <li><a href="#">Sobre nós</a></li>
+              <li><a href="#">Trabalhe conosco</a></li>
+              <li><a href="#">Termos de uso</a></li>
+              <li><a href="#">Privacidade</a></li>
+              <li><a href="#">Segurança</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 className="font-bold">Ajuda</h3>
+
+            <ul>
+              <li><a href="#">Central de ajuda</a></li>
+              <li><a href="#">Entregas e frete</a></li>
+              <li><a href="#">Trocas e devoluções</a></li>
+              <li><a href="#">Contato</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div className="footer-div-redes my-6 max-w-7xl">
+          <hr className="text-gray-700 mb-5" />
+
+          <div className="w-full flex items-center justify-between">
+            <p className="font-medium text-sm text-gray-400">
+              © 2026 Livraria. Todos os direitos reservados.
+            </p>
+
+            <div className="text-gray-300 flex gap-4">
+              <a href="#"><i className="fa-brands fa-instagram fa-xl"></i></a>
+              <a href="#"><i className="fa-brands fa-facebook fa-xl"></i></a>
+              <a href="#"><i className="fa-brands fa-x-twitter fa-xl"></i></a>
+              <a href="#"><i className="fa-brands fa-youtube fa-xl"></i></a>
+              <a href="#"><i className="fa-brands fa-github fa-xl"></i></a>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      <Routes>
+        <Route element={<Cadastro encaminhar={b}></Cadastro>} path="/cadastro"></Route>
+        <Route element={<Login encaminhar={a}></Login>} path="/login"></Route>
+      </Routes>
     </>
   )
 }

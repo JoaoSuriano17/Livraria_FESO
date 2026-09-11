@@ -1,0 +1,343 @@
+body{
+    background-color: #131d2b;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.min-h-full {
+    min-height: 100%;
+}
+
+.rounded-md {
+    border-radius: 0.375rem;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.items-center {
+    align-items: center;
+}
+
+.px-6 {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+
+.py-12 {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.mt-10 {
+    margin-top: 2.5rem;
+}
+
+.mt-2 {
+    margin-top: 0.5rem;
+}
+
+.gap-3 {
+    gap: 0.75rem;
+}
+
+.gap-3\.5 {
+    gap: 0.875rem;
+}
+
+.gap-1\.5 {
+    gap: 0.375rem;
+}
+
+.px-3 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+.py-1\.5 {
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+}
+
+.px-5 {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+}
+
+.py-2 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.w-full {
+    width: 100%;
+}
+
+.w-auto {
+    width: auto;
+}
+
+.max-w-sm {
+    max-width: 24rem;
+}
+
+.h-10 {
+    height: 2.5rem;
+}
+
+.mx-auto {
+    margin-left: 45%;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-white {
+    color: #ffffff;
+}
+
+.text-gray-100 {
+    color: #f3f4f6;
+}
+
+.text-gray-400 {
+    color: #9ca3af;
+}
+
+.text-gray-500 {
+    color: #6b7280;
+}
+
+.text-indigo-300 {
+    color: #a5b4fc;
+}
+
+.text-indigo-400 {
+    color: #818cf8;
+}
+
+.text-sm {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+}
+
+.text-base {
+    font-size: 1rem;
+    line-height: 1.5rem;
+}
+
+.text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+
+.font-medium {
+    font-weight: 500;
+}
+
+.font-semibold {
+    font-weight: 600;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+.tracking-tight {
+    letter-spacing: -0.025em;
+}
+
+
+/* =========================
+   FORMULÁRIO
+   ========================= */
+
+.block {
+    display: block;
+}
+
+.space-y-6 > * + * {
+    margin-top: 1.5rem;
+}
+
+input {
+    box-sizing: border-box;
+    border: 0px;
+}
+
+input.block {
+    display: block;
+}
+
+input.w-full {
+    width: 100%;
+}
+
+input.rounded-md {
+    border-radius: 0.375rem;
+}
+
+input.bg-white\/5 {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+input.px-3 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+input.py-1\.5 {
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+}
+
+input.text-white {
+    color: white;
+}
+
+input.outline-white\/10 {
+    outline: 1px solid rgba(255, 255, 255, 0.1);
+    outline-offset: -1px;
+}
+
+input::placeholder {
+    color: #6b7280;
+}
+
+input:focus {
+    outline: 2px solid #6366f1;
+    outline-offset: -2px;
+}
+
+button {
+    font-family: inherit;
+    border: 0px;
+    border-radius: 10px;
+    color: white;
+}
+
+button.flex {
+    display: flex;
+}
+
+button.w-full {
+    width: 100%;
+}
+
+button.justify-center {
+    justify-content: center;
+}
+
+button.rounded-md {
+    border-radius: 0.375rem;
+}
+
+button.bg-indigo-500 {
+    background-color: #6366f1;
+}
+
+button.bg-gray-800 {
+    background-color: #1f2937;
+}
+
+button.px-3 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+}
+
+button.py-1\.5 {
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+}
+
+button.text-white {
+    color: white;
+}
+
+button.cursor-pointer {
+    cursor: pointer;
+}
+
+button.border-none {
+    border: none;
+}
+
+button.bg-gray-800:hover {
+    background-color: #374151;
+}
+
+button.bg-indigo-500:hover {
+    background-color: #818cf8;
+}
+
+.divider {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.divider .line {
+    flex: 1;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.divider .text-sm {
+    margin: 0 0.75rem;
+    white-space: nowrap;
+}
+
+a {
+    text-decoration: none;
+}
+
+a.font-semibold {
+    font-weight: 600;
+}
+
+a.text-indigo-400 {
+    color: #818cf8;
+}
+
+a.text-indigo-400:hover {
+    color: #a5b4fc;
+}
+
+/* sm: 640px */
+@media (min-width: 640px) {
+
+    .sm\:mx-auto {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .sm\:w-full {
+        width: 100%;
+    }
+
+    .sm\:max-w-sm {
+        max-width: 24rem;
+    }
+
+    .sm\:text-sm {
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+    }
+}
+
+/* lg: 1024px */
+@media (min-width: 1024px) {
+
+    .lg\:px-8 {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
