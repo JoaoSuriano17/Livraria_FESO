@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS autor (
 CREATE TABLE IF NOT EXISTS editora (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(150) NOT NULL UNIQUE,
+    senha VARCHAR(60) NOT NULL,
     cnpj VARCHAR(18) UNIQUE,
     email VARCHAR(255),
     telefone VARCHAR(20),
@@ -384,13 +385,14 @@ VALUES
 /* Editora */
 
 INSERT INTO editora
-(nome, cnpj, email, telefone, site)
+(nome, cnpj, email, telefone, senha, site)
 VALUES
 (
     'Rocco',
     '11.111.111/0001-11',
     'contato@rocco.com.br',
     '(11) 1111-1111',
+    '123',
     'https://www.rocco.com.br'
 ),
 (
@@ -398,6 +400,7 @@ VALUES
     '22.222.222/0001-22',
     'contato@intrinseca.com.br',
     '(21) 2222-2222',
+    '123',
     'https://intrinseca.com.br'
 ),
 (
@@ -405,6 +408,7 @@ VALUES
     '33.333.333/0001-33',
     'contato@companhiadasletras.com.br',
     '(11) 3333-3333',
+    '123',
     'https://www.companhiadasletras.com.br'
 );
 

@@ -8,6 +8,7 @@ app.use(cors());
 
 app.use("/usuarios", require("./routes/usuarios"));
 app.use("/autores", require("./routes/autores"));
+app.use("/editoras", require("./routes/editora"));
 
 
 app.get("/", (req, res) => {
