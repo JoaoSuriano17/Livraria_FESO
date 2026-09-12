@@ -7,7 +7,7 @@ function Cadastro(props){
             <div className="flex min-h-full rounded-md flex-col justify-center px-6 py-12 lg:px-8">
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                     <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company"
-                        className="mx-auto h-10 w-auto" />
+                        className="mx-auto h-10 w-auto flex centro" />
                     <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white">Crie sua conta
                     </h2>
                 </div>

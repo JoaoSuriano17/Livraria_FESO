@@ -341,3 +341,7 @@ a.text-indigo-400:hover {
         padding-right: 2rem;
     }
 }
+
+.centro{
+    justify-content: center;
+}
