@@ -3,36 +3,42 @@ import './App.css'
 import { Routes, Route, Link } from "react-router";
 import Cadastro from './cadastro'
 import Login from './Login'
-import {
-  Search,
-  Heart,
-  ShoppingCart,
-  User,
-  Menu,
-  Star,
-  BookOpenCheck,
-  Quote,
-  ChevronsRight,
-} from "lucide-react";
+import { Search, Heart, ShoppingCart, User, Menu, Star, BookOpenCheck, Quote, ChevronsRight } from "lucide-react";
+import { useRef } from 'react';
+import { SocialIcon } from 'react-social-icons'
 
 function App() {
-  
+
   let a = <Link to={"/cadastro"}>Crie uma</Link>
   let b = <Link to={"/login"}>Faça login</Link>
+
+  const inputSearch = useRef(null)
+  const links = useRef(null)
+  const imgNavbar = useRef(null)
+  const iconsConta = useRef(null)
+
+
+  let [cor, setCor]=useState("black")
+
+  function favoritar(e){
+    console.log(cor)
+    if(cor=="black"){
+      setCor("red")
+    }else{
+      setCor("black")
+    }
+  }
 
   return (
     <>
       <header>
         <div className='topo'>
           <nav className="navbar grid grid-cols-2 md:grid-cols-3 items-center">
-            <div className="nav-logo">
-              <i
-                className="fa-brands fa-tailwind-css fa-2xl"
-                style={{ color: "oklch(67.3% .182 276.935)" }}
-              ></i>
+            <div className="nav-logo" ref={imgNavbar}>
+              <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" className="fa-brands fa-tailwind-css fa-2xl" style={{ color: "oklch(67.3% .182 276.935)" }}/>
             </div>
 
-            <div className="nav-links font-medium flex gap-8 list-none justify-center">
+            <div className="nav-links font-medium flex gap-8 list-none justify-center" ref={links}>
               <li><a href="#">Início</a></li>
               <li><a href="#">Gêneros</a></li>
               <li><a href="#">Autores</a></li>
@@ -44,24 +50,27 @@ function App() {
               <div className="search-wrapper">
                 <input
                   type="text"
-                  className="search-input rounded-full mr-2"
+                  className="rounded-full mr-2 search"
                   placeholder="Buscar livros..."
+                  ref={inputSearch}
                 />
-                <button className="search-toggle" aria-label="Abrir busca">
+                <button className="search-toggle" aria-label="Abrir busca" onClick={()=>{inputSearch.current.classList.toggle('open'); if (inputSearch.current.classList.contains('open')) { inputSearch.current.focus(); imgNavbar.current.classList.add('opacity-0'); iconsConta.current.classList.add('hidden-icons-conta') }}}>
                   <Search />
                 </button>
               </div>
 
-              <div className="div-account flex gap-6">
-                <li><a href="#"><Heart /></a></li>
+              <div className="div-account flex gap-6" ref={iconsConta}>
+                <li><a href="#"><Heart/></a></li>
                 <li><a href="#"><ShoppingCart /></a></li>
                 <li><a href="#"><User /></a></li>
+                <li><a href="#"><Menu /></a></li>
               </div>
 
               <button
                 className="navbar-toggle"
                 aria-label="Abrir menu"
                 aria-expanded="false"
+                onClick={()=>{const isOpen = links.current.classList.toggle('open'); toggle.setAttribute('aria-expanded', isOpen);}}
               >
                 <Menu />
               </button>
@@ -103,7 +112,7 @@ function App() {
                   <a href="#">Explorar Catálogo</a>
                 </button>
 
-                <button className="rounded-md bg-gray-700 font-semibold px-3 py-2 transition-all hover:bg-gray-500 hover:-translate-y-1">
+                <button className="rounded-md bg-gray-500 font-semibold px-3 py-2 transition-all hover:bg-gray-300 hover:-translate-y-1">
                   <a href="#">Ver Resenhas</a>
                 </button>
               </div>
@@ -133,137 +142,39 @@ function App() {
 
           <div className="sessao-lista-livros">
 
-            <div className="card-livro">
-              <div id="div-img-livro" className="relative">
-                <img
-                  src="https://imgs.search.brave.com/G6Vq6U2WXyPwi4tzNKymHOu6z-pvFrEPFiCYwUakgV0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/Zm90b3MtcHJlbWl1/bS9kZXNlbmhvLWRl/LW1hcXVldGUtZGUt/Y2FwYS1kZS1saXZy/by0zZC1pbWFnZW0t/Y29sb3JpZGEtcmVh/bGlzdGFfMTI3MjYy/NS0zOTM2LmpwZz9z/ZW10PWFpc19oeWJy/aWQ"
-                  alt=""
-                  className="rounded-md"
-                />
+            {[1, 2, 3, 4].map((item) => (
+              <div className="card-livro">
+                <div className="div-img-livro">
+                    <img src="https://imgs.search.brave.com/G6Vq6U2WXyPwi4tzNKymHOu6z-pvFrEPFiCYwUakgV0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/Zm90b3MtcHJlbWl1/bS9kZXNlbmhvLWRl/LW1hcXVldGUtZGUt/Y2FwYS1kZS1saXZy/by0zZC1pbWFnZW0t/Y29sb3JpZGEtcmVh/bGlzdGFfMTI3MjYy/NS0zOTM2LmpwZz9z/ZW10PWFpc19oeWJy/aWQ" alt="Livros populares" className="rounded-md"/>
 
-                <button className="heart-favoritar cursor-pointer">
-                  <Heart className="icon-favoritar" />
-                </button>
+                    <button className="heart-favoritar">
+                        <Heart className="icon-favoritar" stroke={cor} onClick={(e)=>{favoritar(e.target)}}/>
+                    </button>
 
-                <div
-                  id="btns-carrinho-detalhe"
-                  className="flex flex-col items-center gap-2 w-full"
-                >
-                  <button className="flex gap-2 justify-center items-center bg-indigo-500 font-medium hover:bg-indigo-400">
-                    Adicionar ao carrinho
-                    <ShoppingCart size={20} />
-                  </button>
-
-                  <button className="bg-gray-100 font-medium text-gray-900 hover:bg-gray-300">
-                    Ver detalhes
-                  </button>
-                </div>
-              </div>
-
-              <div>
-                <h3 className="text-lg mt-2.5 font-bold">Titulo do livro</h3>
-                <p className="text-base text-gray-300 font-medium">Autor</p>
-
-                <div className="flex items-center gap-2 mt-2.5">
-                  <div className="flex">
-                    <Star size={16} />
-                    <Star size={16} />
-                    <Star size={16} />
-                    <Star size={16} />
-                    <Star size={16} />
-                  </div>
-
-                  <p className="text-sm">Nota</p>
-                  <p className="text-sm">Qtde</p>
+                    <div className="btns-carrinho-detalhe">
+                        <button className="btn-carrinho">
+                            Adicionar ao carrinho
+                            <ShoppingCart size={20} />
+                        </button>
+                        <button className="btn-detalhes">Ver detalhes</button>
+                    </div>
                 </div>
 
-                <h3 className="text-xl font-bold mt-3">Preço</h3>
-              </div>
-            </div>
+                <div>
+                    <h3 className="text-lg mt-2.5 font-bold">Titulo do livro</h3>
 
-            <div className="card-livro">
-              <img
-                src="https://imgs.search.brave.com/G6Vq6U2WXyPwi4tzNKymHOu6z-pvFrEPFiCYwUakgV0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/Zm90b3MtcHJlbWl1/bS9kZXNlbmhvLWRl/LW1hcXVldGUtZGUt/Y2FwYS1kZS1saXZy/by0zZC1pbWFnZW0t/Y29sb3JpZGEtcmVh/bGlzdGFfMTI3MjYy/NS0zOTM2LmpwZz9z/ZW10PWFpc19oeWJy/aWQ"
-                alt=""
-                className="rounded-md"
-              />
+                    <p className="text-base text-gray-300 font-medium">Autor</p>
 
-              <div>
-                <h3 className="text-lg mt-2.5 font-bold">Titulo do livro</h3>
-                <p className="text-base text-gray-300 font-medium">Autor</p>
+                    <div className="flex items-center gap-2">
+                        <div className="flex"> <Star size={16} /> <Star size={16} /> <Star size={16} /> <Star size={16} /> <Star size={16} /></div>
+                        <p className="text-sm">Nota</p>
+                        <p className="text-sm">Qtde</p>
+                    </div>
 
-                <div className="flex items-center gap-2">
-                  <div className="flex">
-                    <Star size={16} />
-                    <Star size={16} />
-                    <Star size={16} />
-                    <Star size={16} />
-                    <Star size={16} />
-                  </div>
-
-                  <p className="text-sm">Nota</p>
-                  <p className="text-sm">Qtde</p>
+                    <h3 className="text-xl font-bold mt-3">Preço</h3>
                 </div>
-
-                <h3 className="text-xl font-bold mt-3">Preço</h3>
               </div>
-            </div>
-
-            <div className="card-livro">
-              <img
-                src="https://imgs.search.brave.com/G6Vq6U2WXyPwi4tzNKymHOu6z-pvFrEPFiCYwUakgV0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/Zm90b3MtcHJlbWl1/bS9kZXNlbmhvLWRl/LW1hcXVldGUtZGUt/Y2FwYS1kZS1saXZy/by0zZC1pbWFnZW0t/Y29sb3JpZGEtcmVh/bGlzdGFfMTI3MjYy/NS0zOTM2LmpwZz9z/ZW10PWFpc19oeWJy/aWQ"
-                alt=""
-                className="rounded-md"
-              />
-
-              <div>
-                <h3 className="text-lg mt-2.5 font-bold">Titulo do livro</h3>
-                <p className="text-base text-gray-300 font-medium">Autor</p>
-
-                <div className="flex items-center gap-2">
-                  <div className="flex">
-                    <Star size={16} />
-                    <Star size={16} />
-                    <Star size={16} />
-                    <Star size={16} />
-                    <Star size={16} />
-                  </div>
-
-                  <p className="text-sm">Nota</p>
-                  <p className="text-sm">Qtde</p>
-                </div>
-
-                <h3 className="text-xl font-bold mt-3">Preço</h3>
-              </div>
-            </div>
-
-            <div className="card-livro">
-              <img
-                src="https://imgs.search.brave.com/G6Vq6U2WXyPwi4tzNKymHOu6z-pvFrEPFiCYwUakgV0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/Zm90b3MtcHJlbWl1/bS9kZXNlbmhvLWRl/LW1hcXVldGUtZGUt/Y2FwYS1kZS1saXZy/by0zZC1pbWFnZW0t/Y29sb3JpZGEtcmVh/bGlzdGFfMTI3MjYy/NS0zOTM2LmpwZz9z/ZW10PWFpc19oeWJy/aWQ"
-                alt=""
-                className="rounded-md"
-              />
-
-              <div>
-                <h3 className="text-lg mt-2.5 font-bold">Titulo do livro</h3>
-                <p className="text-base text-gray-300 font-medium">Autor</p>
-
-                <div className="flex items-center gap-2">
-                  <div className="flex">
-                    <Star size={16} />
-                    <Star size={16} />
-                    <Star size={16} />
-                    <Star size={16} />
-                    <Star size={16} />
-                  </div>
-
-                  <p className="text-sm">Nota</p>
-                  <p className="text-sm">Qtde</p>
-                </div>
-
-                <h3 className="text-xl font-bold mt-3">Preço</h3>
-              </div>
-            </div>
+            ))}
 
           </div>
         </div>
@@ -275,35 +186,38 @@ function App() {
           <div className="sessao-lista-livros mt-4 flex gap-6">
 
             {[1, 2, 3, 4].map((item) => (
-              <div className="card-livro" key={item}>
-                <img
-                  src="https://imgs.search.brave.com/G6Vq6U2WXyPwi4tzNKymHOu6z-pvFrEPFiCYwUakgV0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/Zm90b3MtcHJlbWl1/bS9kZXNlbmhvLWRlLW1hcXVldGUtZGUt/Y2FwYS1kZS1saXZy/by0zZC1pbWFnZW0t/Y29sb3JpZGEtcmVh/bGlzdGFfMTI3MjYy/NS0zOTM2LmpwZz9z/ZW10PWFpc19oeWJy/aWQ"
-                  alt=""
-                  className="rounded-md"
-                />
+              <div className="card-livro">
+                <div className="div-img-livro">
+                    <img src="https://cdn.awsli.com.br/2500x2500/2495/2495784/produto/2713792053793d743b9.jpg" alt="Livros de" className="rounded-md"/>
+
+                    <button className="heart-favoritar">
+                        <Heart className="icon-favoritar" stroke={cor} onClick={(e)=>{favoritar(e.target)}}/>
+                    </button>
+
+                    <div className="btns-carrinho-detalhe">
+                        <button className="btn-carrinho">
+                            Adicionar ao carrinho
+                            <ShoppingCart size={20} />
+                        </button>
+                        <button className="btn-detalhes">Ver detalhes</button>
+                    </div>
+                </div>
 
                 <div>
-                  <h3 className="text-lg mt-2.5 font-bold">Titulo do livro</h3>
-                  <p className="text-base text-gray-300 font-medium">Autor</p>
+                    <h3 className="text-lg mt-2.5 font-bold">Titulo do livro</h3>
 
-                  <div className="flex items-center gap-2">
-                    <div className="flex">
-                      <Star size={16} />
-                      <Star size={16} />
-                      <Star size={16} />
-                      <Star size={16} />
-                      <Star size={16} />
+                    <p className="text-base text-gray-300 font-medium">Autor</p>
+
+                    <div className="flex items-center gap-2">
+                        <div className="flex"> <Star size={16} /> <Star size={16} /> <Star size={16} /> <Star size={16} /> <Star size={16} /></div>
+                        <p className="text-sm">Nota</p>
+                        <p className="text-sm">Qtde</p>
                     </div>
 
-                    <p className="text-sm">Nota</p>
-                    <p className="text-sm">Qtde</p>
-                  </div>
-
-                  <h3 className="text-xl font-bold mt-3">Preço</h3>
+                    <h3 className="text-xl font-bold mt-3">Preço</h3>
                 </div>
               </div>
             ))}
-
           </div>
         </div>
 
@@ -314,31 +228,35 @@ function App() {
           <div className="sessao-lista-livros mt-4 flex gap-6">
 
             {[1, 2, 3, 4].map((item) => (
-              <div className="card-livro" key={item}>
-                <img
-                  src="https://imgs.search.brave.com/G6Vq6U2WXyPwi4tzNKymHOu6z-pvFrEPFiCYwUakgV0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/Zm90b3MtcHJlbWl1/bS9kZXNlbmhvLWRlLw"
-                  alt=""
-                  className="rounded-md"
-                />
+              <div className="card-livro">
+                <div className="div-img-livro">
+                    <img src="https://a-static.mlcdn.com.br/1500x1500/livro-a-barraca-do-beijo/magazineluiza/230958300/cc9cb2e8af15376ed897392ea1a9d926.jpg" alt="Livros de" className="rounded-md"/>
+
+                    <button className="heart-favoritar">
+                        <Heart className="icon-favoritar" stroke={cor} onClick={(e)=>{favoritar(e.target)}}/>
+                    </button>
+
+                    <div className="btns-carrinho-detalhe">
+                        <button className="btn-carrinho">
+                            Adicionar ao carrinho
+                            <ShoppingCart size={20} />
+                        </button>
+                        <button className="btn-detalhes">Ver detalhes</button>
+                    </div>
+                </div>
 
                 <div>
-                  <h3 className="text-lg mt-2.5 font-bold">Titulo do livro</h3>
-                  <p className="text-base text-gray-300 font-medium">Autor</p>
+                    <h3 className="text-lg mt-2.5 font-bold">Titulo do livro</h3>
 
-                  <div className="flex items-center gap-2">
-                    <div className="flex">
-                      <Star size={16} />
-                      <Star size={16} />
-                      <Star size={16} />
-                      <Star size={16} />
-                      <Star size={16} />
+                    <p className="text-base text-gray-300 font-medium">Autor</p>
+
+                    <div className="flex items-center gap-2">
+                        <div className="flex"> <Star size={16} /> <Star size={16} /> <Star size={16} /> <Star size={16} /> <Star size={16} /></div>
+                        <p className="text-sm">Nota</p>
+                        <p className="text-sm">Qtde</p>
                     </div>
 
-                    <p className="text-sm">Nota</p>
-                    <p className="text-sm">Qtde</p>
-                  </div>
-
-                  <h3 className="text-xl font-bold mt-3">Preço</h3>
+                    <h3 className="text-xl font-bold mt-3">Preço</h3>
                 </div>
               </div>
             ))}
@@ -353,31 +271,35 @@ function App() {
           <div className="sessao-lista-livros mt-4 flex gap-6">
 
             {[1, 2, 3, 4].map((item) => (
-              <div className="card-livro" key={item}>
-                <img
-                  src="https://imgs.search.brave.com/G6Vq6U2WXyPwi4tzNKymHOu6z-pvFrEPFiCYwUakgV0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/Zm90b3MtcHJlbWl1/bS9kZXNlbmhvLWRlL"
-                  alt=""
-                  className="rounded-md"
-                />
+              <div className="card-livro">
+                <div className="div-img-livro">
+                    <img src="https://cdn.culturagenial.com/imagens/a-vila-dos-pecados.jpg?class=article" alt="Livros de" className="rounded-md"/>
+
+                    <button className="heart-favoritar">
+                        <Heart className="icon-favoritar" stroke={cor} onClick={(e)=>{favoritar(e.target)}}/>
+                    </button>
+
+                    <div className="btns-carrinho-detalhe">
+                        <button className="btn-carrinho">
+                            Adicionar ao carrinho
+                            <ShoppingCart size={20} />
+                        </button>
+                        <button className="btn-detalhes">Ver detalhes</button>
+                    </div>
+                </div>
 
                 <div>
-                  <h3 className="text-lg mt-2.5 font-bold">Titulo do livro</h3>
-                  <p className="text-base text-gray-300 font-medium">Autor</p>
+                    <h3 className="text-lg mt-2.5 font-bold">Titulo do livro</h3>
 
-                  <div className="flex items-center gap-2">
-                    <div className="flex">
-                      <Star size={16} />
-                      <Star size={16} />
-                      <Star size={16} />
-                      <Star size={16} />
-                      <Star size={16} />
+                    <p className="text-base text-gray-300 font-medium">Autor</p>
+
+                    <div className="flex items-center gap-2">
+                        <div className="flex"> <Star size={16} /> <Star size={16} /> <Star size={16} /> <Star size={16} /> <Star size={16} /></div>
+                        <p className="text-sm">Nota</p>
+                        <p className="text-sm">Qtde</p>
                     </div>
 
-                    <p className="text-sm">Nota</p>
-                    <p className="text-sm">Qtde</p>
-                  </div>
-
-                  <h3 className="text-xl font-bold mt-3">Preço</h3>
+                    <h3 className="text-xl font-bold mt-3">Preço</h3>
                 </div>
               </div>
             ))}
@@ -387,7 +309,7 @@ function App() {
 
       </main>
 
-      <section id="previa-resenhas" className="text-center max-w-full p-12 lg:p-24 m-auto">
+      <section className="text-center max-w-full p-12 lg:p-24 m-auto previa-resenhas">
 
         <p className="mb-7 flex items-center justify-center gap-1.5 ring-1 ring-gray-500 hover:ring-gray-400 text-gray-400 py-1.5 text-xs sm:text-sm w-54 rounded-full m-auto">
           <BookOpenCheck size={20} />
@@ -403,7 +325,7 @@ function App() {
           experiências, descobertas e emoções em nosso espaço dedicado à literatura.
         </h3>
 
-        <div id="preview-resenha" className="flex gap-7">
+        <div className="flex gap-7 preview-resenha">
 
           {[1, 2, 3].map((item) => (
             <div
@@ -455,10 +377,7 @@ function App() {
 
       <footer className="border-t border-t-gray-700 flex-1">
 
-        <div
-          id="newsletter"
-          className="bg-gray-800 rounded-xl max-w-7xl m-auto my-10 flex sm:flex-row md:flex-row flex-col sm:gap-0 gap-4 items-center justify-between p-2 sm:p-10"
-        >
+        <div id="newsletter" className="bg-gray-800 rounded-xl max-w-7xl m-auto my-10 flex sm:flex-row md:flex-row flex-col sm:gap-0 gap-4 items-center justify-between p-2 sm:p-10">
           <div>
             <h2 className="text-white font-bold text-base">
               Receba resenhas na sua caixa de entrada
@@ -486,16 +405,10 @@ function App() {
           </div>
         </div>
 
-        <div
-          id="links-footer"
-          className="grid grid-cols-1 sm:grid-cols-4 max-w-7xl m-auto my-16 gap-6 sm:gap-0 items-center text-center sm:text-left justify-items-center p-2 sm:p-5 text-sm"
-        >
+        <div id="links-footer" className="grid grid-cols-1 sm:grid-cols-4 max-w-7xl m-auto my-16 gap-6 sm:gap-0 items-center text-center sm:text-left justify-items-center p-2 sm:p-5 text-sm">
           <div>
             <h3 className="font-bold text-lg flex items-center gap-2.5 justify-center sm:justify-start">
-              <i
-                className="fa-brands fa-tailwind-css fa-xl"
-                style={{ color: "oklch(67.3% .182 276.935)" }}
-              ></i>
+              <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" className="fa-brands fa-tailwind-css fa-2xl" style={{ color: "oklch(67.3% .182 276.935)" }}/>
               Página
             </h3>
 
@@ -549,12 +462,12 @@ function App() {
               © 2026 Livraria. Todos os direitos reservados.
             </p>
 
-            <div className="text-gray-300 flex gap-4">
-              <a href="#"><i className="fa-brands fa-instagram fa-xl"></i></a>
-              <a href="#"><i className="fa-brands fa-facebook fa-xl"></i></a>
-              <a href="#"><i className="fa-brands fa-x-twitter fa-xl"></i></a>
-              <a href="#"><i className="fa-brands fa-youtube fa-xl"></i></a>
-              <a href="#"><i className="fa-brands fa-github fa-xl"></i></a>
+            <div className="text-gray-300 flex">
+              <SocialIcon url="https://www.instagram.com/teamhmble/" network="instagram" bgColor='#11182700'/>
+              <SocialIcon url="https://www.tiktok.com/@teamhmble" network="tiktok" bgColor='#11182700'/>
+              <SocialIcon url="https://x.com/TeamHmble" network="x" bgColor='#11182700'/>
+              <SocialIcon url="https://www.youtube.com/@teamhmble" network="youtube" bgColor='#11182700'/>
+              <SocialIcon url="https://github.com/JoaoSuriano17/Livraria_FESO" network="github" bgColor='#11182700'/>
             </div>
           </div>
         </div>
@@ -563,6 +476,7 @@ function App() {
       <Routes>
         <Route element={<Cadastro encaminhar={b}></Cadastro>} path="/cadastro"></Route>
         <Route element={<Login encaminhar={a}></Login>} path="/login"></Route>
+        <Route path="/"></Route>
       </Routes>
     </>
   )
