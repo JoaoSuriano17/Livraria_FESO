@@ -15,8 +15,8 @@ CREATE TABLE IF NOT EXISTS usuario (
 CREATE TABLE IF NOT EXISTS autor (
     id SERIAL PRIMARY KEY,
     idUsuario INT NOT NULL UNIQUE,
-    biografia TEXT,
-    data_nascimento DATE,
+    biografia TEXT NOT NULL,
+    data_nascimento DATE NOT NULL,
 
     CONSTRAINT autor_usuario_fk
         FOREIGN KEY (idUsuario)
