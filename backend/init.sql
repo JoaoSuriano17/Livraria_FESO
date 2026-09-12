@@ -1,16 +1,6 @@
--- ============================================================
--- BANCO DE DADOS
--- ============================================================
-
 CREATE DATABASE livraria;
 
--- Após criar o banco, conecte-se ao banco livraria
--- antes de executar as tabelas abaixo.
-
-
--- ============================================================
--- USUARIO
--- ============================================================
+/* O MER que me salve */
 
 CREATE TABLE IF NOT EXISTS usuario (
     id SERIAL PRIMARY KEY,
@@ -18,18 +8,9 @@ CREATE TABLE IF NOT EXISTS usuario (
     login VARCHAR(255) NOT NULL UNIQUE,
     senha VARCHAR(60) NOT NULL,
     img VARCHAR(255),
-    nacionalidade VARCHAR(200),
+    nacionalidade VARCHAR(200) NOT NULL,
     ativo BOOLEAN NOT NULL DEFAULT TRUE
 );
-
-
--- ============================================================
--- AUTOR
---
--- Especialização de USUARIO.
--- Um usuário pode ser autor ou não.
--- Se existir registro em AUTOR, ele é autor.
--- ============================================================
 
 CREATE TABLE IF NOT EXISTS autor (
     id SERIAL PRIMARY KEY,
@@ -42,11 +23,6 @@ CREATE TABLE IF NOT EXISTS autor (
         REFERENCES usuario(id)
 );
 
-
--- ============================================================
--- EDITORA
--- ============================================================
-
 CREATE TABLE IF NOT EXISTS editora (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(150) NOT NULL UNIQUE,
@@ -57,11 +33,6 @@ CREATE TABLE IF NOT EXISTS editora (
     ativo BOOLEAN NOT NULL DEFAULT TRUE
 );
 
-
--- ============================================================
--- GENERO
--- ============================================================
-
 CREATE TABLE IF NOT EXISTS genero (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(100) NOT NULL UNIQUE,
@@ -69,15 +40,7 @@ CREATE TABLE IF NOT EXISTS genero (
     ativo BOOLEAN NOT NULL DEFAULT TRUE
 );
 
-
--- ============================================================
--- SOLICITACAO_LIVRO
---
--- O AUTOR solicita que uma EDITORA publique um livro.
---
--- O livro ainda NÃO existe na tabela LIVRO.
--- ============================================================
-
+/*O autor solicita uma publicação de seu livro por uma editora */
 CREATE TABLE IF NOT EXISTS solicitacao_livro (
     id SERIAL PRIMARY KEY,
 
@@ -127,17 +90,7 @@ CREATE TABLE IF NOT EXISTS solicitacao_livro (
         CHECK (preco >= 0)
 );
 
-
--- ============================================================
--- LIVRO
---
--- O livro só é criado pela EDITORA após aprovação
--- de uma solicitação.
---
--- ativo = TRUE  -> livro disponível
--- ativo = FALSE -> livro desativado pela editora
--- ============================================================
-
+/* O livro é criado por uma editora, quando a mesma aceita a solicitação de um livro feita por um autor */
 CREATE TABLE IF NOT EXISTS livro (
     id SERIAL PRIMARY KEY,
 
@@ -184,11 +137,6 @@ CREATE TABLE IF NOT EXISTS livro (
         CHECK (preco >= 0)
 );
 
-
--- ============================================================
--- LIVRO_GENERO
--- ============================================================
-
 CREATE TABLE IF NOT EXISTS livro_genero (
     idLivro INT NOT NULL,
     idGenero INT NOT NULL,
@@ -203,11 +151,6 @@ CREATE TABLE IF NOT EXISTS livro_genero (
         FOREIGN KEY (idGenero)
         REFERENCES genero(id)
 );
-
-
--- ============================================================
--- ENDERECO
--- ============================================================
 
 CREATE TABLE IF NOT EXISTS endereco (
     id SERIAL PRIMARY KEY,
@@ -229,13 +172,7 @@ CREATE TABLE IF NOT EXISTS endereco (
         REFERENCES usuario(id)
 );
 
-
--- ============================================================
--- PEDIDO
---
--- Somente USUARIOS compram livros.
--- EDITORA não possui relacionamento com PEDIDO.
--- ============================================================
+/*Sobre pedido: Somente usuários compram livros (portanto, uma editora não compra) */
 
 CREATE TABLE IF NOT EXISTS pedido (
     id SERIAL PRIMARY KEY,
@@ -265,11 +202,6 @@ CREATE TABLE IF NOT EXISTS pedido (
         CHECK (frete >= 0)
 );
 
-
--- ============================================================
--- ITEM_PEDIDO
--- ============================================================
-
 CREATE TABLE IF NOT EXISTS item_pedido (
     id SERIAL PRIMARY KEY,
 
@@ -294,11 +226,6 @@ CREATE TABLE IF NOT EXISTS item_pedido (
         CHECK (preco_unitario >= 0)
 );
 
-
--- ============================================================
--- PAGAMENTO
--- ============================================================
-
 CREATE TABLE IF NOT EXISTS pagamento (
     id SERIAL PRIMARY KEY,
 
@@ -318,11 +245,6 @@ CREATE TABLE IF NOT EXISTS pagamento (
     CONSTRAINT pagamento_valor_ck
         CHECK (valor >= 0)
 );
-
-
--- ============================================================
--- AVALIACAO
--- ============================================================
 
 CREATE TABLE IF NOT EXISTS avaliacao (
     id SERIAL PRIMARY KEY,
@@ -350,11 +272,6 @@ CREATE TABLE IF NOT EXISTS avaliacao (
         UNIQUE (idUsuario, idLivro)
 );
 
-
--- ============================================================
--- FAVORITO
--- ============================================================
-
 CREATE TABLE IF NOT EXISTS favorito (
     idUsuario INT NOT NULL,
     idLivro INT NOT NULL,
@@ -372,11 +289,6 @@ CREATE TABLE IF NOT EXISTS favorito (
         REFERENCES livro(id)
 );
 
-
--- ============================================================
--- CARRINHO
--- ============================================================
-
 CREATE TABLE IF NOT EXISTS carrinho (
     id SERIAL PRIMARY KEY,
 
@@ -389,11 +301,6 @@ CREATE TABLE IF NOT EXISTS carrinho (
         FOREIGN KEY (idUsuario)
         REFERENCES usuario(id)
 );
-
-
--- ============================================================
--- ITEM_CARRINHO
--- ============================================================
 
 CREATE TABLE IF NOT EXISTS item_carrinho (
     id SERIAL PRIMARY KEY,
@@ -417,11 +324,6 @@ CREATE TABLE IF NOT EXISTS item_carrinho (
     CONSTRAINT item_carrinho_quantidade_ck
         CHECK (quantidade > 0)
 );
-
-
--- ============================================================
--- ESTOQUE_MOVIMENTACAO
--- ============================================================
 
 CREATE TABLE IF NOT EXISTS estoque_movimentacao (
     id SERIAL PRIMARY KEY,
@@ -452,13 +354,22 @@ CREATE TABLE IF NOT EXISTS estoque_movimentacao (
         CHECK (quantidade > 0)
 );
 
+/* INSERÇÕES DO CÓDIGO */
 
 
-/*inserções*/
+/* Usuário */
+
 INSERT INTO usuario
 (nome, login, senha, nacionalidade)
 VALUES
-('J. K. Rowling', 'jk.rowling', '123', 'Britânica'), ('Locke', 'locke.filosofo', '123', 'Britânico');
+('J. K. Rowling', 'jk.rowling', '123', 'Britânica'),
+('Locke', 'locke.filosofo', '123', 'Britânico'),
+('Maria Oliveira', 'maria.oliveira', '123', 'Brasileira'),
+('Carlos Souza', 'carlos.souza', '123', 'Brasileira'),
+('Ana Costa', 'ana.costa', '123', 'Brasileira');
+
+
+/* Autor */
 
 INSERT INTO autor
 (idUsuario, biografia, data_nascimento)
@@ -468,6 +379,125 @@ VALUES
     'Escritora britânica conhecida pela série Harry Potter.',
     '1965-07-31'
 );
+
+
+/* Editora */
+
+INSERT INTO editora
+(nome, cnpj, email, telefone, site)
+VALUES
+(
+    'Rocco',
+    '11.111.111/0001-11',
+    'contato@rocco.com.br',
+    '(11) 1111-1111',
+    'https://www.rocco.com.br'
+),
+(
+    'Intrínseca',
+    '22.222.222/0001-22',
+    'contato@intrinseca.com.br',
+    '(21) 2222-2222',
+    'https://intrinseca.com.br'
+),
+(
+    'Companhia das Letras',
+    '33.333.333/0001-33',
+    'contato@companhiadasletras.com.br',
+    '(11) 3333-3333',
+    'https://www.companhiadasletras.com.br'
+);
+
+
+/* Gêneros */
+
+INSERT INTO genero
+(nome, descricao)
+VALUES
+(
+    'Fantasia',
+    'Obras que apresentam elementos mágicos, sobrenaturais ou mundos imaginários.'
+),
+(
+    'Romance',
+    'Obras centradas em relações amorosas e sentimentos humanos.'
+),
+(
+    'Aventura',
+    'Histórias marcadas por viagens, desafios e acontecimentos extraordinários.'
+),
+(
+    'Ficção',
+    'Narrativas ficcionais de diferentes estilos e temas.'
+),
+(
+    'Literatura Brasileira',
+    'Obras produzidas por autores brasileiros.'
+);
+
+
+/* Endereços */
+
+INSERT INTO endereco
+(
+    idUsuario,
+    cep,
+    logradouro,
+    numero,
+    complemento,
+    bairro,
+    cidade,
+    estado,
+    principal
+)
+VALUES
+(
+    2,
+    '01001-000',
+    'Praça da Sé',
+    '100',
+    NULL,
+    'Sé',
+    'São Paulo',
+    'SP',
+    TRUE
+),
+(
+    3,
+    '20040-020',
+    'Rua do Ouvidor',
+    '200',
+    'Apartamento 302',
+    'Centro',
+    'Rio de Janeiro',
+    'RJ',
+    TRUE
+),
+(
+    4,
+    '30130-000',
+    'Avenida Afonso Pena',
+    '500',
+    NULL,
+    'Centro',
+    'Belo Horizonte',
+    'MG',
+    TRUE
+),
+(
+    5,
+    '80010-000',
+    'Rua XV de Novembro',
+    '300',
+    NULL,
+    'Centro',
+    'Curitiba',
+    'PR',
+    TRUE
+);
+
+
+/* Solicitação de livro - autor faz para uma editora */
 
 INSERT INTO solicitacao_livro
 (
@@ -494,13 +524,54 @@ VALUES
     50.00,
     'Harry descobre que é um bruxo e começa seus estudos em Hogwarts.',
     '20x14'
+),
+(
+    1,
+    1,
+    'Harry Potter e a Câmara Secreta',
+    '12',
+    2,
+    1998,
+    287,
+    55.00,
+    'Harry retorna a Hogwarts e enfrenta novos mistérios.',
+    '20x14'
+),
+(
+    1,
+    2,
+    'Harry Potter e o Prisioneiro de Azkaban',
+    '12',
+    3,
+    1999,
+    348,
+    60.00,
+    'Harry descobre novos segredos sobre seu passado.',
+    '20x14'
 );
+
+
+/* Aprovação das solicitações */
 
 UPDATE solicitacao_livro
 SET
     status = 'APROVADA',
-    data_resposta = CURRENT_TIMESTAMP
-WHERE id = 1;
+    data_resposta = CURRENT_TIMESTAMP,
+    observacao = 'Solicitação aprovada pela editora.'
+WHERE id IN (1, 2);
+
+
+/* Recusa de um solicitação */
+
+UPDATE solicitacao_livro
+SET
+    status = 'RECUSADA',
+    data_resposta = CURRENT_TIMESTAMP,
+    observacao = 'Solicitação recusada pela editora.'
+WHERE id = 3;
+
+
+/* Livro, quando aprovados */
 
 INSERT INTO livro
 (
@@ -526,18 +597,61 @@ SELECT
     volume,
     data_publicacao,
     qtde_paginas,
-    0,
+    10,
     preco,
     sinopse,
     tamanho
 FROM solicitacao_livro
-WHERE id = 1
-  AND status = 'APROVADA';
+WHERE status = 'APROVADA';
+
+
+/* Livro - Gênero */
+
+INSERT INTO livro_genero
+(idLivro, idGenero)
+VALUES
+(1, 1),
+(1, 3),
+
+(2, 1),
+(2, 3);
+
+
+/* Carrinhos */
+
+INSERT INTO carrinho
+(idUsuario)
+VALUES
+(2),
+(3),
+(4);
+
+
+/* Intens do carrinho */
+
+INSERT INTO item_carrinho
+(
+    idCarrinho,
+    idLivro,
+    quantidade
+)
+VALUES
+(1, 1, 1),
+(1, 2, 1),
+
+(2, 1, 2),
+
+(3, 2, 1);
+
+
+/* Pedidos */
 
 INSERT INTO pedido
 (
     idUsuario,
     idEndereco,
+    data_pedido,
+    status,
     valor_total,
     frete
 )
@@ -545,9 +659,30 @@ VALUES
 (
     2,
     1,
+    '2026-08-01 10:30:00',
+    'PAGO',
     60.00,
     10.00
+),
+(
+    3,
+    2,
+    '2026-08-05 15:20:00',
+    'ENVIADO',
+    67.00,
+    12.00
+),
+(
+    4,
+    3,
+    '2026-08-10 09:15:00',
+    'ENTREGUE',
+    65.00,
+    10.00
 );
+
+
+/* Itens de um pedido */
 
 INSERT INTO item_pedido
 (
@@ -562,8 +697,149 @@ VALUES
     1,
     1,
     50.00
+),
+(
+    2,
+    2,
+    1,
+    55.00
+),
+(
+    3,
+    1,
+    1,
+    50.00
 );
 
-SELECT *
-FROM livro
-WHERE ativo = TRUE;
+
+/* Pagamentos */
+
+INSERT INTO pagamento
+(
+    idPedido,
+    metodo,
+    status,
+    valor,
+    data_pagamento
+)
+VALUES
+(
+    1,
+    'PIX',
+    'APROVADO',
+    60.00,
+    '2026-08-01 10:35:00'
+),
+(
+    2,
+    'CARTAO_CREDITO',
+    'APROVADO',
+    67.00,
+    '2026-08-05 15:25:00'
+),
+(
+    3,
+    'PIX',
+    'APROVADO',
+    65.00,
+    '2026-08-10 09:20:00'
+);
+
+
+/* Avaliações */
+
+INSERT INTO avaliacao
+(
+    idUsuario,
+    idLivro,
+    nota,
+    comentario
+)
+VALUES
+(
+    2,
+    1,
+    5,
+    'Excelente livro, uma ótima introdução ao universo de Harry Potter.'
+),
+(
+    3,
+    2,
+    5,
+    'Uma história muito envolvente e divertida.'
+),
+(
+    4,
+    1,
+    4,
+    'Livro muito bom e com uma história interessante.'
+);
+
+
+/* Favoritos */
+
+INSERT INTO favorito
+(
+    idUsuario,
+    idLivro
+)
+VALUES
+(2, 1),
+(2, 2),
+(3, 1),
+(4, 2);
+
+
+/* Estoque - Entrada */
+
+INSERT INTO estoque_movimentacao
+(
+    idLivro,
+    tipo,
+    quantidade,
+    motivo
+)
+VALUES
+(
+    1,
+    'ENTRADA',
+    10,
+    'Estoque inicial'
+),
+(
+    2,
+    'ENTRADA',
+    10,
+    'Estoque inicial'
+);
+
+
+/* Estoque - Saída */
+
+INSERT INTO estoque_movimentacao
+(
+    idLivro,
+    tipo,
+    quantidade,
+    motivo
+)
+VALUES
+(
+    1,
+    'SAIDA',
+    1,
+    'Venda - pedido 1'
+),
+(
+    2,
+    'SAIDA',
+    1,
+    'Venda - pedido 2'
+),
+(
+    1,
+    'SAIDA',
+    1,
+    'Venda - pedido 3'
+);
+
