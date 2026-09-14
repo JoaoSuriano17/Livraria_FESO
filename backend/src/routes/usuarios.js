@@ -23,12 +23,14 @@ POST   /login *
 
 router.post("/", async (req, res) => {
     try{
-        const { nome, login, senha, img, nacionalidade } = req.body || {}
+        const { nome, login, senha, nacionalidade } = req.body || {}
+        let {img}=req.body
 
         if (!nome){throw new Error("Nome deve ser um parâmetro!")}
         if (!login){throw new Error("Nome de login deve ser um parâmetro!")}
         if (!senha){throw new Error("Senha deve ser um parâmetro!")}
         if (!nacionalidade){throw new Error("Nacionalidade deve ser um parâmetro!")}
+        if (!img){img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxwRq6lrMvJCXjX5CLp_HxfkNT7hViRcAOJZWtqtxgUGaGiYNEXXlpdts&s=10"}
 
         const envio = await db.query("INSERT INTO usuario(nome, login, senha, img, nacionalidade) VALUES ($1, $2, $3, $4, $5) RETURNING id, nome, login", [nome, login, senha, img, nacionalidade])
         if (envio.rowCount === 0){
@@ -49,7 +51,7 @@ router.post("/login", async (req, res) => {
         if (!login){return res.status(400).json({msg: "Login deve ser um parâmetro"})}
         if (!senha){return res.status(400).json({msg: "Senha deve ser um parâmetro"})}
 
-        const envio_login = await db.query("SELECT id, nome, login, img, nacionalidade FROM usuario WHERE login=$1 AND senha=$2 AND ativo =TRUE", [login, senha])
+        const envio_login = await db.query("SELECT id, nome, login, img, nacionalidade, senha FROM usuario WHERE login=$1 AND senha=$2 AND ativo =TRUE", [login, senha])
         if (envio_login.rowCount === 0){
             return res.status(401).json({msg: "Login e/ou senha incorretos!"})
         }
@@ -99,7 +101,7 @@ router.get("/:id", async (req, res) => {
     try{
         const id = req.params.id
     
-        const pedido_usuario = await db.query("SELECT nome, login, img, nacionalidade FROM usuario WHERE id=$1 AND ativo=TRUE", [id])
+        const pedido_usuario = await db.query("SELECT nome, login, img, nacionalidade, senha FROM usuario WHERE id=$1 AND ativo=TRUE", [id])
         if (pedido_usuario.rowCount === 0){
             throw new Error("Usuário não encontrado ou inativo!")
         }

@@ -30,7 +30,7 @@ function Login(props) {
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
                             <label htmlFor="email" className="block text-sm/6 font-medium text-gray-100">
-                                Email
+                                Login
                             </label>
 
                             <div className="mt-2">

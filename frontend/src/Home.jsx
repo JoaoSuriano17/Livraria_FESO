@@ -84,8 +84,8 @@ function Home(props) {
               </h1>
 
               <h3 className="text-base/6 p-3 sm:p-0 text-gray-400 font-medium my-9 sm:text-xl/8">
-                Encontre mais que simples obras: encontre
-                perspectivas, inspirações, emoção e desperte sua imaginação. Explore
+                Encontre mais do que simples obras: encontre
+                perspectivas, inspirações, emoções e desperte sua imaginação. Explore
                 nosso catálogo feito para quem ama ser leitor
               </h3>
 
