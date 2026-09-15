@@ -32,7 +32,7 @@ router.post("/", async (req, res) => {
         if (!nacionalidade){throw new Error("Nacionalidade deve ser um parâmetro!")}
         if (!img){img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSxwRq6lrMvJCXjX5CLp_HxfkNT7hViRcAOJZWtqtxgUGaGiYNEXXlpdts&s=10"}
 
-        const envio = await db.query("INSERT INTO usuario(nome, login, senha, img, nacionalidade) VALUES ($1, $2, $3, $4, $5) RETURNING id, nome, login", [nome, login, senha, img, nacionalidade])
+        const envio = await db.query("INSERT INTO usuario(nome, login, senha, img, nacionalidade) VALUES ($1, $2, $3, $4, $5) RETURNING id, nome, login, senha, img, nacionalidade", [nome, login, senha, img, nacionalidade])
         if (envio.rowCount === 0){
             throw new Error("Erro ao adicionar o usuário!")
         }

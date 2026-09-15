@@ -7,7 +7,7 @@ CREATE TABLE IF NOT EXISTS usuario (
     nome VARCHAR(255) NOT NULL,
     login VARCHAR(255) NOT NULL UNIQUE,
     senha VARCHAR(60) NOT NULL,
-    img VARCHAR(255),
+    img TEXT,
     nacionalidade VARCHAR(200) NOT NULL,
     ativo BOOLEAN NOT NULL DEFAULT TRUE
 );

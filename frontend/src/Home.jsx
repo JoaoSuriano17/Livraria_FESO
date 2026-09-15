@@ -23,7 +23,7 @@ function Home(props) {
             <div className="nav-links font-medium flex gap-8 list-none justify-center" ref={links}>
               <li><a href="#">Início</a></li>
               <li><a href="#">Gêneros</a></li>
-              <li><a href="#">Autores</a></li>
+              <li>{props.encaminhar2}</li>
               <li><a href="#">Resenhas</a></li>
               <li><a href="#">Minha Estante</a></li>
             </div>
