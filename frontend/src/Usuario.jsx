@@ -61,7 +61,18 @@ function Usuario(props){
         console.log(r)
 
         if(r==true){
-            navigate("/cadastro")
+            navigate("/usuario", {
+                state:{
+                    "id":location.state.id,
+                    "nome":location.state.nome,
+                    "login":location.state.login,
+                    "senha":location.state.senha,
+                    "img":location.state.img,
+                    "nacionalidade":location.state.nacionalidade,
+                    "biografia":biografia,
+                    "data_nascimento":location.state.data_nascimento
+                }
+            })
         }
      }
 
@@ -88,6 +99,7 @@ function Usuario(props){
         <>
             <img src={location.state.img} className="imagemUsuario" />
             <p>Olá {location.state.nome} {autor && "grande autor"}</p>
+            <p>Biografia: {autor && location.state.biografia}</p>
             {autor && <><h2>Alterar biografia</h2>
             <form onSubmit={alterarBiografia}>
                 <input id="senha" type="text" name="senha" placeholder="Senha" value={senha3} onChange={(e) => setSenha3(e.target.value)} required autoComplete="password"/><br></br><br></br>

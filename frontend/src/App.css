@@ -114,6 +114,7 @@
 .w-12 { width: 3rem; }
 .w-54 { width: 13.5rem; }
 .w-68 { width: 17rem; }
+.w-85 { width: 20rem; }
 .w-sm { width: 24rem; }
 .w-xs { width: 20rem; }
 
@@ -678,4 +679,8 @@ body::-webkit-scrollbar {
 
 .preview-resenha{
   justify-content: center;
+}
+
+.topo{
+  margin-top: -20px;
 }

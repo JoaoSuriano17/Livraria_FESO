@@ -1,15 +1,15 @@
 import { useState } from "react";
 import "./cadastro.css";
 
-function Login(props) {
-    const [login, setLogin] = useState("");
+function LoginEditora(props) {
+    const [cnpj, setCnpj] = useState("");
     const [senha, setSenha] = useState("");
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            await props.login(login, senha);
+            await props.login(cnpj, senha);
         } catch (error) {
             console.error("Erro ao fazer login:", error);
         }
@@ -22,7 +22,7 @@ function Login(props) {
                     <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" className="mx-auto h-10 w-auto centro flex"/>
 
                     <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white">
-                        Faça login na sua conta
+                        Faça login como editora
                     </h2>
                 </div>
 
@@ -30,11 +30,11 @@ function Login(props) {
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
                             <label htmlFor="email" className="block text-sm/6 font-medium text-gray-100">
-                                Login
+                                CNPJ
                             </label>
 
                             <div className="mt-2">
-                                <input id="login" type="login" name="login" value={login} onChange={(e) => setLogin(e.target.value)} required autoComplete="login" className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
+                                <input id="cnpj" type="login" name="cnpj" value={cnpj} onChange={(e) => setCnpj(e.target.value)} required autoComplete="cnpj" className="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
                             </div>
                         </div>
 
@@ -115,4 +115,4 @@ function Login(props) {
     );
 }
 
-export default Login;
+export default LoginEditora;

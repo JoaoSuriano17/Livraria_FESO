@@ -21,7 +21,7 @@ function Home(props) {
             </div>
 
             <div className="nav-links font-medium flex gap-8 list-none justify-center" ref={links}>
-              <li><a href="#">Início</a></li>
+              <li>{props.encaminhar3}</li>
               <li><a href="#">Gêneros</a></li>
               <li>{props.encaminhar2}</li>
               <li><a href="#">Resenhas</a></li>
@@ -125,7 +125,7 @@ function Home(props) {
           <div className="sessao-lista-livros">
 
             {[1, 2, 3, 4].map((item) => (
-              <div className="card-livro">
+              <div className="card-livro" key={item}>
                 <div className="div-img-livro">
                     <img src="https://imgs.search.brave.com/G6Vq6U2WXyPwi4tzNKymHOu6z-pvFrEPFiCYwUakgV0/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pbWcu/ZnJlZXBpay5jb20v/Zm90b3MtcHJlbWl1/bS9kZXNlbmhvLWRl/LW1hcXVldGUtZGUt/Y2FwYS1kZS1saXZy/by0zZC1pbWFnZW0t/Y29sb3JpZGEtcmVh/bGlzdGFfMTI3MjYy/NS0zOTM2LmpwZz9z/ZW10PWFpc19oeWJy/aWQ" alt="Livros populares" className="rounded-md"/>
 
@@ -148,7 +148,7 @@ function Home(props) {
                     <p className="text-base text-gray-300 font-medium">Autor</p>
 
                     <div className="flex items-center gap-2">
-                        <div className="flex"> {[1,2,3,4,5].map((item)=>(<Star size={20} fill='black' onClick={(e)=>{if (e.target.getAttribute("fill")=="black"){e.target.setAttribute("fill", "yellow")} else{e.target.setAttribute("fill", "black")}}} />))} </div>
+                        <div className="flex"> {[1,2,3,4,5].map((item)=>(<Star key={item} size={20} fill='black' onClick={(e)=>{if (e.target.getAttribute("fill")=="black"){e.target.setAttribute("fill", "yellow")} else{e.target.setAttribute("fill", "black")}}} />))} </div>
                         <p className="text-sm">Nota</p>
                         <p className="text-sm">Qtde</p>
                     </div>
@@ -168,7 +168,7 @@ function Home(props) {
           <div className="sessao-lista-livros mt-4 flex gap-6">
 
             {[1, 2, 3, 4].map((item) => (
-              <div className="card-livro">
+              <div className="card-livro" key={item}>
                 <div className="div-img-livro">
                     <img src="https://cdn.awsli.com.br/2500x2500/2495/2495784/produto/2713792053793d743b9.jpg" alt="Livros de" className="rounded-md"/>
 
@@ -191,7 +191,7 @@ function Home(props) {
                     <p className="text-base text-gray-300 font-medium">Autor</p>
 
                     <div className="flex items-center gap-2">
-                        <div className="flex"> {[1,2,3,4,5].map((item)=>(<Star size={20} fill='black' onClick={(e)=>{if (e.target.getAttribute("fill")=="black"){e.target.setAttribute("fill", "yellow")} else{e.target.setAttribute("fill", "black")}}} />))} </div>
+                        <div className="flex"> {[1,2,3,4,5].map((item)=>(<Star key={item} size={20} fill='black' onClick={(e)=>{if (e.target.getAttribute("fill")=="black"){e.target.setAttribute("fill", "yellow")} else{e.target.setAttribute("fill", "black")}}} />))} </div>
                         <p className="text-sm">Nota</p>
                         <p className="text-sm">Qtde</p>
                     </div>
@@ -210,7 +210,7 @@ function Home(props) {
           <div className="sessao-lista-livros mt-4 flex gap-6">
 
             {[1, 2, 3, 4].map((item) => (
-              <div className="card-livro">
+              <div className="card-livro" key={item}>
                 <div className="div-img-livro">
                     <img src="https://a-static.mlcdn.com.br/1500x1500/livro-a-barraca-do-beijo/magazineluiza/230958300/cc9cb2e8af15376ed897392ea1a9d926.jpg" alt="Livros de" className="rounded-md"/>
 
@@ -233,7 +233,7 @@ function Home(props) {
                     <p className="text-base text-gray-300 font-medium">Autor</p>
 
                     <div className="flex items-center gap-2">
-                        <div className="flex"> {[1,2,3,4,5].map((item)=>(<Star size={20} fill='black' onClick={(e)=>{if (e.target.getAttribute("fill")=="black"){e.target.setAttribute("fill", "yellow")} else{e.target.setAttribute("fill", "black")}}} />))} </div>
+                        <div className="flex"> {[1,2,3,4,5].map((item)=>(<Star key={item} size={20} fill='black' onClick={(e)=>{if (e.target.getAttribute("fill")=="black"){e.target.setAttribute("fill", "yellow")} else{e.target.setAttribute("fill", "black")}}} />))} </div>
                         <p className="text-sm">Nota</p>
                         <p className="text-sm">Qtde</p>
                     </div>
@@ -253,7 +253,7 @@ function Home(props) {
           <div className="sessao-lista-livros mt-4 flex gap-6">
 
             {[1, 2, 3, 4].map((item) => (
-              <div className="card-livro">
+              <div className="card-livro" key={item}>
                 <div className="div-img-livro">
                     <img src="https://cdn.culturagenial.com/imagens/a-vila-dos-pecados.jpg?class=article" alt="Livros de" className="rounded-md"/>
 
@@ -276,7 +276,7 @@ function Home(props) {
                     <p className="text-base text-gray-300 font-medium">Autor</p>
 
                     <div className="flex items-center gap-2">
-                        <div className="flex"> {[1,2,3,4,5].map((item)=>(<Star size={20} fill='black' onClick={(e)=>{if (e.target.getAttribute("fill")=="black"){e.target.setAttribute("fill", "yellow")} else{e.target.setAttribute("fill", "black")}}} />))} </div>
+                        <div className="flex"> {[1,2,3,4,5].map((item)=>(<Star key={item} size={20} fill='black' onClick={(e)=>{if (e.target.getAttribute("fill")=="black"){e.target.setAttribute("fill", "yellow")} else{e.target.setAttribute("fill", "black")}}} />))} </div>
                         <p className="text-sm">Nota</p>
                         <p className="text-sm">Qtde</p>
                     </div>
@@ -310,17 +310,10 @@ function Home(props) {
         <div className="flex gap-7 preview-resenha">
 
           {[1, 2, 3].map((item) => (
-            <div
-              id={`card-resenha-${item}`}
-              className="w-sm bg-gray-800 flex flex-col gap-4 border rounded-2xl border-indigo-400 p-6"
-              key={item}
-            >
+            <div id={`card-resenha-${item}`} className="w-sm bg-gray-800 flex flex-col gap-4 border rounded-2xl border-indigo-400 p-6" key={item}>
               <Quote className="text-indigo-400" />
 
-              <p className="text-start text-lg font-medium">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Ullam amet laboriosam deserunt, quo maiores fugit saepe.
-              </p>
+              <p className="text-start text-lg font-medium"> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam amet laboriosam deserunt, quo maiores fugit saepe.</p>
 
               <div className="estrelas flex">
                 <Star className="fill-indigo-500 text-indigo-500" size={16} />
@@ -330,20 +323,14 @@ function Home(props) {
                 <Star className="text-gray-500" size={16} />
               </div>
 
-              <hr className="text-gray-600" />
+              <hr className="text-gray-600 w-85" />
 
               <div className="flex items-center gap-3">
-                <img
-                  src="https://imgs.search.brave.com/vjxXZ2TH4aWuAagTsRnosHNbJ5nGPg1R8pAlToUtSMI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzQzL2Ri/LzcxLzQzZGI3MWM2/YmViNDQ5NzFjZGY1/ZmNhYzRlOWI0Njk0/LmpwZw"
-                  alt=""
-                  className="rounded-full w-12 h-12 object-cover"
-                />
+                <img src="https://imgs.search.brave.com/vjxXZ2TH4aWuAagTsRnosHNbJ5nGPg1R8pAlToUtSMI/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9pLnBp/bmltZy5jb20vb3Jp/Z2luYWxzLzQzL2Ri/LzcxLzQzZGI3MWM2/YmViNDQ5NzFjZGY1/ZmNhYzRlOWI0Njk0/LmpwZw" alt="" className="rounded-full w-12 h-12 object-cover"/>
 
                 <div className="flex flex-col items-baseline">
                   <p className="font-bold">Nome</p>
-                  <p className="font-medium text-gray-300 italic text-xs">
-                    Sobre o livro
-                  </p>
+                  <p className="font-medium text-gray-300 italic text-xs"> Sobre o livro</p>
                 </div>
               </div>
             </div>

@@ -49,7 +49,7 @@ router.patch("/:id/telefone", async (req, res) => {
         const id = req.params.id
         const { cnpj, senha, telefone } = req.body || {}
         
-        const pedido_editora_telefone = await db.query("UPDATE editora SET telefone=$1 WHERE cnpj=$2 AND senha=$3", [telefone, cnpj, senha])
+        const pedido_editora_telefone = await db.query("UPDATE editora SET telefone=$1 WHERE cnpj=$2 AND senha=$3 AND id=$4 AND ativo=TRUE", [telefone, cnpj, senha, id])
         if (pedido_editora_telefone.rowCount === 0){
             throw new Error("Erro ao atualizar o telefone!")
         }
@@ -66,7 +66,7 @@ router.patch("/:id/site", async (req, res) => {
         const id = req.params.id
         const { cnpj, senha, site } = req.body || {}
         
-        const pedido_editora_telefone = await db.query("UPDATE editora SET site=$1 WHERE cnpj=$2 AND senha=$3", [site, cnpj, senha])
+        const pedido_editora_telefone = await db.query("UPDATE editora SET site=$1 WHERE cnpj=$2 AND senha=$3 AND id=$4 AND ativo=TRUE", [site, cnpj, senha, id])
         if (pedido_editora_telefone.rowCount === 0){
             throw new Error("Erro ao atualizar o site da editora!")
         }
@@ -82,7 +82,7 @@ router.get("/:id", async (req, res) => {
     try{
         const id = req.params.id
     
-        const pedido_editora = await db.query("SELECT nome, email, telefone, site FROM editora WHERE id=$1 AND ativo = TRUE", [id])
+        const pedido_editora = await db.query("SELECT nome, email, telefone, site, senha, cnpj FROM editora WHERE id=$1 AND ativo = TRUE", [id])
         if (pedido_editora.rowCount === 0){
             throw new Error("Editora não encontrada ou inativa!")
         }
@@ -97,7 +97,7 @@ router.get("/:id", async (req, res) => {
 
 router.get("/", async (req, res) => {
     try{    
-        const pedido_editora = await db.query("SELECT nome, email, telefone, site FROM editora WHERE ativo = TRUE")
+        const pedido_editora = await db.query("SELECT nome, email, telefone, site, senha FROM editora WHERE ativo = TRUE")
         if (pedido_editora.rowCount === 0){
             throw new Error("Editora não encontrada ou inativa!")
         }
@@ -121,7 +121,7 @@ router.post("/login", async (req, res) => {
             return res.status(401).json({msg: "Cnpj e/ou senha incorretos!"})
         }
 
-        res.json({usuario: envio_login.rows[0]})
+        res.json({editora: envio_login.rows[0]})
 
     }catch(erro){
         return res.status(500).json({msg: erro.message})
