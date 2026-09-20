@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import './App.css'
 import { Search, Heart, ShoppingCart, User, Menu, Star, BookOpenCheck, Quote, ChevronsRight } from "lucide-react";
 import { useRef } from 'react';
@@ -13,8 +12,8 @@ function Home(props) {
 
   return (
     <>
+    <body className='h-full min-h-full flex flex-col'>
       <header>
-        <div className='topo'>
           <nav className="navbar grid grid-cols-2 md:grid-cols-3 items-center">
             <div className="nav-logo" ref={imgNavbar}>
               <img src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500" className="fa-brands fa-tailwind-css fa-2xl" style={{ color: "oklch(67.3% .182 276.935)" }}/>
@@ -100,7 +99,6 @@ function Home(props) {
               </div>
             </div>
           </section>
-        </div>
 
         <div
           aria-hidden="true"
@@ -439,6 +437,7 @@ function Home(props) {
           </div>
         </div>
       </footer>
+    </body>
     </>
   )
 }
