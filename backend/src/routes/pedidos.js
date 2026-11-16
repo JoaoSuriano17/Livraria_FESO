@@ -23,3 +23,5 @@ CREATE TABLE IF NOT EXISTS pedido (
     CONSTRAINT pedido_frete_ck CHECK (frete >= 0)
 );
 */
+
+module.exports = router;
