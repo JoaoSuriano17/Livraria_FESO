@@ -1,6 +1,15 @@
 const express = require("express");
 const router = express.Router();
 const db = require("../db");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const senhaTokenJWT = "senhaSecretissimaIFSP";
+
+const multer = require("multer");
+const upload = multer({ storage: multer.memoryStorage() });
+
+const verificarToken = require("../middlewares/verificarToken");
+
 /*
 CREATE TABLE IF NOT EXISTS autor (
     id SERIAL PRIMARY KEY,
