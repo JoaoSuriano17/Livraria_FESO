@@ -3,22 +3,14 @@ const router = express.Router();
 const db = require("../db");
 /*
 CREATE TABLE IF NOT EXISTS editora (
-    id SERIAL PRIMARY KEY,
+    id SERIAL PRIMARY KEY ,
+    cnpj VARCHAR(18) NOT NULL,
     nome VARCHAR(150) NOT NULL UNIQUE,
-    cnpj VARCHAR(18) UNIQUE,
+    senha CHAR(60) NOT NULL,
     email VARCHAR(255),
-    telefone VARCHAR(20),
-    site VARCHAR(255),
+    img INT,
     ativo BOOLEAN NOT NULL DEFAULT TRUE
 );
-*/
-
-/*
-POST   /editoras *
-GET    /editoras *
-GET    /editoras/:id *
-PUT    /editoras/:id *
-DELETE /editoras/:id *
 */
 
 router.post("/", async (req, res) => {

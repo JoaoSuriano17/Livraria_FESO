@@ -5,20 +5,11 @@ const db = require("../db");
 CREATE TABLE IF NOT EXISTS autor (
     id SERIAL PRIMARY KEY,
     idUsuario INT NOT NULL UNIQUE,
-    biografia TEXT,
-    data_nascimento DATE,
+    biografia TEXT NOT NULL,
+    data_nascimento DATE NOT NULL,
 
-    CONSTRAINT autor_usuario_fk
-        FOREIGN KEY (idUsuario)
-        REFERENCES usuario(id)
+    CONSTRAINT autor_usuario_fk FOREIGN KEY (idUsuario) REFERENCES usuario(id)
 );
-*/
-
-/*
-POST   /autores *
-GET    /autores/:id
-PUT    /autores/:id *
-GET    /autores/:id/livros
 */
 
 router.post("/", async (req, res) => {

@@ -2,9 +2,9 @@ const express = require("express");
 const router = express.Router();
 const db = require("../db");
 
-/*CREATE TABLE IF NOT EXISTS solicitacao_livro (
+/*
+CREATE TABLE IF NOT EXISTS solicitacao_livro (
     id SERIAL PRIMARY KEY,
-
     idAutor INT NOT NULL,
     idEditora INT NOT NULL,
 
@@ -18,38 +18,16 @@ const db = require("../db");
     tamanho VARCHAR(5),
 
     status VARCHAR(20) NOT NULL DEFAULT 'PENDENTE',
-
-    data_solicitacao TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    data_resposta TIMESTAMP,
-
     observacao VARCHAR(500),
 
-    CONSTRAINT solicitacao_autor_fk
-        FOREIGN KEY (idAutor)
-        REFERENCES autor(id),
-
-    CONSTRAINT solicitacao_editora_fk
-        FOREIGN KEY (idEditora)
-        REFERENCES editora(id),
-
-    CONSTRAINT solicitacao_status_ck
-        CHECK (
-            status IN (
-                'PENDENTE',
-                'APROVADA',
-                'RECUSADA'
-            )
-        ),
-
-    CONSTRAINT solicitacao_volume_ck
-        CHECK (volume > 0),
-
-    CONSTRAINT solicitacao_paginas_ck
-        CHECK (qtde_paginas > 0),
-
-    CONSTRAINT solicitacao_preco_ck
-        CHECK (preco >= 0)
-);*/
+    CONSTRAINT solicitacao_autor_fk FOREIGN KEY (idAutor) REFERENCES autor(id),
+    CONSTRAINT solicitacao_editora_fk FOREIGN KEY (idEditora) REFERENCES editora(id),
+    CONSTRAINT solicitacao_status_ck CHECK (status IN ( 'PENDENTE', 'APROVADA', 'RECUSADA' )),
+    CONSTRAINT solicitacao_volume_ck CHECK (volume > 0),
+    CONSTRAINT solicitacao_paginas_ck CHECK (qtde_paginas > 0),
+    CONSTRAINT solicitacao_preco_ck CHECK (preco >= 0)
+);
+*/
 
 router.post("/", async (req, res) => {
     try{

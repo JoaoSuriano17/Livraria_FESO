@@ -6,19 +6,10 @@ CREATE TABLE IF NOT EXISTS usuario (
     id SERIAL PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
     login VARCHAR(255) NOT NULL UNIQUE,
-    senha VARCHAR(60) NOT NULL,
-    img VARCHAR(255),
-    nacionalidade VARCHAR(200),
-    ativo BOOLEAN NOT NULL DEFAULT TRUE
+    senha CHAR(60) NOT NULL,
+    ativo BOOLEAN NOT NULL DEFAULT TRUE,
+    img INT
 );
-*/
-
-/*
-POST   /usuarios *
-GET    /usuarios/:id *
-PUT    /usuarios/:id *
-DELETE /usuarios/:id * (desativar)
-POST   /login *
 */
 
 router.post("/", async (req, res) => {
